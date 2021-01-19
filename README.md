@@ -23,11 +23,11 @@ Select:
 2 - Return to Menu
 
 Sort:
-  A. Bubble Sort
-  B. Selection Sort
-  C. Insertion Sort
-  D. Shell Sort
-  E. Merge Sort
+A. Bubble Sort
+B. Selection Sort
+C. Insertion Sort
+D. Shell Sort
+E. Merge Sort
   
   Output of sorting
 
