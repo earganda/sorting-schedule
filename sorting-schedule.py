@@ -86,11 +86,74 @@ def shellSort(array, n):
         interval //= 2
 
 
+#dito ko na nilagay functions ko -from jerome
+import time
+
+list_of_schedules=[]
+
+def input_subjects(not_first_recursion = False):
+    if not_first_recursion:
+        print("|| -------- NOTICE: subject name shouldn't be empty")
+    ans = input("|| Enter subject name: ")
+    return ans if ans != "" else input_subjects(True)
+
+def input_time(not_first_recursion = False):
+    while True:
+        try:
+            num = input('|| Enter Time (HH:MM) : ')
+            time.strptime(num, '%H:%M')
+        except:
+            print("|| -------- NOTICE: wrong input please follow the correct time format")
+            continue
+        break
+    return num
+
+def num_of_subjects(not_first_recursion = False):
+    if not_first_recursion:
+        print("|| -------- NOTICE: please enter value greater than 0")
+    while True:
+        try:
+            num = int(input('|| How many subjects will you add? '))
+        except:
+            print("|| -------- NOTICE: respond with a number dummy!")
+            continue
+        break
+    return num if num > 0 else num_of_subjects(True)
+
+def ask_to_add_more(ans):
+    if ans == 'Y': add_sched()
+    elif ans == 'N': print("+=================================================")
+    else: 
+        print("|| -------- NOTICE: please answer y or n only")
+        ask_to_add_more(input("|| would you like to add more to your schedule? y or n: ").upper())
+
+def add_sched():
+    print("+=================================================")
+    for _ in range(num_of_subjects()):
+        print("||------------------------------------------------")
+        list_of_schedules.append({
+            "subject": input_subjects(),
+            "time": input_time(),
+        })
+    print("||------------------------------------------------")
+    print(f"|| Here's a list of the schedules you added: ")
+    for sched in list_of_schedules:
+        print(f"|| {sched['subject']} : {sched['time']}")
+    print("||------------------------------------------------")
+
+    ask_to_add_more(input("|| would you like to add more to your schedule? y or n: ").upper())
+
+# end of - functions ni jerome
+
+
+
 menu_choice = input("""Menu: 
 1. View Sched
 2. Add Sched 
 
 Answer: """)
+
+
 
 # View Sched
 if menu_choice == '1':
@@ -98,60 +161,58 @@ if menu_choice == '1':
 
 # Add Sched
 elif menu_choice == '2':
-    sched_q = input('How many subjects will you add? ')
 
-    # This line should run n times (depending sa input of sched_q) or bahala ka
-    # if you thought of something else 
-    subject_time = input('Enter time: ')
-    subject_name = input('Enter subject name: ')
+    # eto na yung add schedule kumpleto na to with validation -from jerome
+    add_sched()
 
-    print('\nSubject added!\n', subject_name, '—', subject_time)
 
-    # Sort or Main Menu
-    add_choice = input("""Select:
-    1 - Sort
-    2 - Return to Menu
+    # may error dito sa baba kay kinomment ko muna uncomment nyo nalang kung sino man nag code nito -from jerome
     
-    Answer: """)
+    # # Sort or Main Menu
+    # add_choice = input("""Select:
+    # 1 - Sort
+    # 2 - Return to Menu
+    
+    # Answer: """)
 
-    # Sorting Methods
-    if add_choice == '1':
-            didSelect = 0
-            while (didSelect == 0):
-                sorting_choice = input("""Choose a sorting method: 
-                A. Bubble Sort
-                B. Selection Sort
-                C. Insertion Sort
-                D. Shell Sort
-                E. Merge Sort
+    # # Sorting Methods
+    # if add_choice == '1':
+    #         didSelect = 0
+    #         while (didSelect == 0):
+    #             sorting_choice = input("""Choose a sorting method: 
+    #             A. Bubble Sort
+    #             B. Selection Sort
+    #             C. Insertion Sort
+    #             D. Shell Sort
+    #             E. Merge Sort
         
-                Answer: """)
+    #             Answer: """)
 
-                #NOTE: Change "variablename" to variable holding unsorted schedules
+    #             #NOTE: Change "variablename" to variable holding unsorted schedules
 
-                if sorting_choice.upper() == 'A':
-                    bubble_sort(variablename)
-                    didSelect = 1
+    #             if sorting_choice.upper() == 'A':
+    #                 bubble_sort(variablename)
+    #                 didSelect = 1
 
-                elif sorting_choice.upper() == 'B':
-                    selection_sort(variablename) 
-                    didSelect = 1
+    #             elif sorting_choice.upper() == 'B':
+    #                 selection_sort(variablename) 
+    #                 didSelect = 1
 
-                elif sorting_choice.upper() == 'C':
-                     insertion_sort(variablename)
-                     didSelect = 1
+    #             elif sorting_choice.upper() == 'C':
+    #                  insertion_sort(variablename)
+    #                  didSelect = 1
 
-                elif sorting_choice.upper() == 'D':
-                     size = len(variablename)
-                     shellSort(variablename, size)
-                     didSelect = 1
+    #             elif sorting_choice.upper() == 'D':
+    #                  size = len(variablename)
+    #                  shellSort(variablename, size)
+    #                  didSelect = 1
 
-                elif sorting_choice.upper() == 'E':
-                      merge_sort(variablename)
-                      didSelect = 1
+    #             elif sorting_choice.upper() == 'E':
+    #                   merge_sort(variablename)
+    #                   didSelect = 1
 
-        return_menu = input('Return menu?')
+    #     return_menu = input('Return menu?')
 
-    elif add_choice == '2':
-        print('Dapat magback to menu.')
+    # elif add_choice == '2':
+    #     print('Dapat magback to menu.')
 
