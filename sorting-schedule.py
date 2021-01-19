@@ -97,7 +97,7 @@ def input_subjects(not_first_recursion = False):
     ans = input("|| Enter subject name: ")
     return ans if ans != "" else input_subjects(True)
 
-def input_time(not_first_recursion = False):
+def input_time():
     while True:
         try:
             num = input('|| Enter Time (HH:MM) : ')
