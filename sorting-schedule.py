@@ -123,7 +123,9 @@ def num_of_subjects(not_first_recursion = False):
 def ask_to_add_more(ans):
     if ans == 'Y': add_sched()
     elif ans == 'N': print("+=================================================")
-    else: print("|| -------- NOTICE: please answer y or n only")
+    else: 
+        print("|| -------- NOTICE: please answer y or n only")
+        ask_to_add_more(input("|| would you like to add more to your schedule? y or n: ").upper())
 
 def add_sched():
     print("+=================================================")
