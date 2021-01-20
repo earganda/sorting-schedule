@@ -1,6 +1,7 @@
 import time
 
 list_of_schedules = []
+header = "+================================================="
 
 
 def bubble_sort(nums):
@@ -119,17 +120,17 @@ def num_of_subjects(not_first_recursion=False):
 
 
 def ask_to_add_more(ans):
-    if ans == 'Y':
+    if ans.upper() == 'Y':
         add_sched()
-    elif ans == 'N':
-        print("+=================================================")
+    elif ans.upper() == 'N':
+        print(header)
     else:
-        print("|| -------- NOTICE: please answer y or n only")
-        ask_to_add_more(input("|| would you like to add more to your schedule? y or n: ").upper())
+        print("|| -------- Notice: please answer Y or N only")
+        ask_to_add_more(input("|| Would you like to add more to your schedule?\n|| Y or N: ").upper())
 
 
 def add_sched():
-    print("+=================================================")
+    print(header)
     for _ in range(num_of_subjects()):
         print("||------------------------------------------------")
         list_of_schedules.append({
@@ -137,12 +138,12 @@ def add_sched():
             "time": input_time(),
         })
     print("||------------------------------------------------")
-    print(f"|| Here's a list of the schedules you added: ")
+    print(f"|| Here's a list of schedules you added: ")
     for sched in list_of_schedules:
         print(f"|| {sched['subject']} : {sched['time']}")
     print("||------------------------------------------------")
 
-    ask_to_add_more(input("|| would you like to add more to your schedule? Y or N: ").upper())
+    ask_to_add_more(input("|| Would you like to add more to your schedule? Y or N: ").upper())
 
 
 def convert_and_sort(ls, choice):
@@ -154,19 +155,19 @@ def convert_and_sort(ls, choice):
     for i in range(0, len(converted_time)): 
         converted_time[i] = int(converted_time[i])
     if choice == "A":
-        print('You chose: Bubble Sort\n')
+        print('|| You chose: Bubble Sort\n|| ')
         bubble_sort(converted_time)
     if choice == "B":
-        print('You chose: Selection Sort\n')
+        print('|| You chose: Selection Sort\n|| ')
         selection_sort(converted_time)
     if choice == "C":
-        print('You chose: Insertion Sort\n')
+        print('|| You chose: Insertion Sort\n|| ')
         insertion_sort(converted_time)
     if choice == "D":
-        print('You chose: Shell Sort\n')
+        print('|| You chose: Shell Sort\n|| ')
         shellSort(converted_time)
     if choice == "E":
-        print('You chose: Merge Sort\n')
+        print('|| You chose: Merge Sort\n|| ')
         merge_sort(converted_time)
     convert_to_list_of_schedules(ls, converted_time, converted_name)
 
@@ -196,60 +197,53 @@ def convert_to_list_of_schedules(ls, ict, cn):
     list_of_schedules = temsched
     
 
-menu_choice = input("""Menu: 
-1. View Sched
-2. Add Sched
+def main_menu():
+    while True:
+        print(header)
+        menu_choice = input('|| Menu: \n|| 1. View Sched\n|| 2. Add Sched \n|| Answer: ')
 
-Answer: """)
+        # View Sched
+        if menu_choice == '1':
+            print('')
+
+        # Add Sched
+        elif menu_choice == '2':
+            add_sched()
+
+            # Sort or Main Menu
+            add_choice = input('|| Select: \n|| 1 - Sort \n|| 2 - Return to Menu \n|| Answer: ')
+
+            # Sorting Methods
+            if add_choice == '1':
+                didSelect = 0
+                while (didSelect == 0):
+                    print(header)
+                    sorting_choice = input('|| Choose a sorting method: \n|| A. Bubble Sort \n|| B. Selection Sort \n|| C. Insertion Sort \n|| D. Shell Sort \n|| E. Merge Sort \n|| Answer: ')
+
+                    # Change "variablename" to variable holding unsorted schedules
+
+                    if sorting_choice.upper() == 'A' or sorting_choice.upper() == 'B' or sorting_choice.upper() == 'C' or sorting_choice.upper() == 'D' or sorting_choice.upper() == 'E':
+                        didSelect = 1
+                        convert_and_sort(list_of_schedules, sorting_choice.upper())
+                        # COMMENT this for final project NEEDED For Checking Only
+                        print('|| ', list_of_schedules)
+                        #######################
+                        print("|| Sorting Done")
+
+                    else:
+                        print("|| -------- Command not found! ")
+
+                    return_menu = input('|| Return to menu? Press Y or N: ')
+                    if return_menu.upper() == "Y":
+                        main_menu()
+                    else:
+                        print('|| Exiting...')
+                        exit()
+
+            elif add_choice == '2':
+                main_menu()
 
 
-# View Sched
-if menu_choice == '1':
-    print('')
-
-# Add Sched
-elif menu_choice == '2':
-    add_sched()
-
-    # Sort or Main Menu
-    add_choice = input("""Select:
-    1 - Sort
-    2 - Return to Menu
-    
-    Answer: """)
-
-    # Sorting Methods
-    if add_choice == '1':
-        didSelect = 0
-        while (didSelect == 0):
-            sorting_choice = input("""
-    Choose a sorting method: 
-    A. Bubble Sort
-    B. Selection Sort
-    C. Insertion Sort
-    D. Shell Sort
-    E. Merge Sort
-        
-    Answer: """)
-
-            # Change "variablename" to variable holding unsorted schedules
-
-            if sorting_choice.upper() == 'A' or sorting_choice.upper() == 'B' or sorting_choice.upper() == 'C' or sorting_choice.upper() == 'D' or sorting_choice.upper() == 'E':
-                didSelect = 1
-                convert_and_sort(list_of_schedules, sorting_choice.upper())
-                # COMMENT this for final project NEEDED For Checking Only
-                print(list_of_schedules)
-                #######################
-                print("Sorting Done")
-
-            else:
-                print("Command not found! ")
-
-            return_menu = input('Return menu?')
-            if return_menu.upper() == "Y":
-                didSelect = 1
-
-    elif add_choice == '2':
-        print('Dapat magback to menu.')
+main_menu()
 
 
