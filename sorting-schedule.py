@@ -62,7 +62,6 @@ def merge(left_list, right_list):
 
 
 def merge_sort(nums):
-
     if len(nums) <= 1:
         return nums
 
@@ -75,7 +74,6 @@ def merge_sort(nums):
 
 
 def shellSort(array, n):
-
     interval = n // 2
     while interval > 0:
         for i in range(interval, n):
@@ -164,7 +162,7 @@ def convert_and_sort(ls, choice):
         shellSort(converted_time)
     if choice == "E":
         merge_sort(converted_time)
-    convert_to_list_of_schedules(ls, converted_time,converted_name)
+    convert_to_list_of_schedules(ls, converted_time, converted_name)
 
 
 def convert_to_list_of_schedules(ls, ct, cn):
@@ -183,8 +181,6 @@ def convert_to_list_of_schedules(ls, ct, cn):
                 index += 1
     list_of_schedules = temsched
     
-        
-
 
 menu_choice = input("""Menu: 
 1. View Sched
@@ -226,14 +222,15 @@ elif menu_choice == '2':
 
             if sorting_choice.upper() == 'A' or sorting_choice.upper() == 'B' or sorting_choice.upper() == 'C' or sorting_choice.upper() == 'D' or sorting_choice.upper() == 'E':
                 didSelect = 1
-                convert_and_sort(list_of_schedules,sorting_choice.upper())
+                convert_and_sort(list_of_schedules, sorting_choice.upper())
                 #COMMENT this for final project NEEDED For Checking Only
-                print(list_of_schedules)
+                for x in list_of_schedules:
+                    print(x['time'], x['subject'])
                 #######################
                 print("Sorting Done")
 
             else:
-                print("The Command does not found")
+                print("The Command not found")
 
             return_menu = input('Return menu?')
             if return_menu.upper() == "Y":
