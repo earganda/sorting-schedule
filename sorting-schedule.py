@@ -61,16 +61,37 @@ def merge(left_list, right_list):
     return sorted_list
 
 
-def merge_sort(nums):
-    if len(nums) <= 1:
-        return nums
+def mergeSort(myList):
+    if len(myList) > 1:
+        mid = len(myList) // 2
+        left = myList[:mid]
+        right = myList[mid:]
 
-    mid = len(nums) // 2
+        mergeSort(left)
+        mergeSort(right)
 
-    left_list = merge_sort(nums[:mid])
-    right_list = merge_sort(nums[mid:])
+        i = 0
+        j = 0
+        
+        k = 0
+        
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+              myList[k] = left[i]
+              i += 1
+            else:
+                myList[k] = right[j]
+                j += 1
+            k += 1
+        while i < len(left):
+            myList[k] = left[i]
+            i += 1
+            k += 1
 
-    return merge(left_list, right_list)
+        while j < len(right):
+            myList[k]=right[j]
+            j += 1
+            k += 1
 
 
 def shellSort(array, n):
@@ -165,10 +186,10 @@ def convert_and_sort(ls, choice):
         insertion_sort(converted_time)
     if choice == "D":
         print('|| You chose: Shell Sort\n|| ')
-        shellSort(converted_time)
+        shellSort(converted_time, len(ls))
     if choice == "E":
         print('|| You chose: Merge Sort\n|| ')
-        merge_sort(converted_time)
+        mergeSort(converted_time)
     convert_to_list_of_schedules(ls, converted_time, converted_name)
 
 
@@ -241,5 +262,4 @@ def main_menu():
 
 
 main_menu()
-
 
