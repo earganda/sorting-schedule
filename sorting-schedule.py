@@ -49,7 +49,6 @@ def merge(left_list, right_list):
                 sorted_list.append(right_list[right_list_index])
                 right_list_index += 1
 
-
         elif left_list_index == left_list_length:
             sorted_list.append(right_list[right_list_index])
             right_list_index += 1
@@ -153,14 +152,19 @@ def convert_and_sort(ls, choice):
         converted_time.append(x['time'])
         converted_name.append(x['subject'])
     if choice == "A":
+        print('You chose: Bubble Sort\n')
         bubble_sort(converted_time)
     if choice == "B":
+        print('You chose: Selection Sort\n')
         selection_sort(converted_time)
     if choice == "C":
+        print('You chose: Insertion Sort\n')
         insertion_sort(converted_time)
     if choice == "D":
+        print('You chose: Shell Sort\n')
         shellSort(converted_time)
     if choice == "E":
+        print('You chose: Merge Sort\n')
         merge_sort(converted_time)
     convert_to_list_of_schedules(ls, converted_time, converted_name)
 
@@ -175,7 +179,7 @@ def convert_to_list_of_schedules(ls, ct, cn):
                 temsched.append({
                 "subject": cn[index],
                 "time": ct[i],
-                 })
+                })
                 break;
             else:
                 index += 1
@@ -223,14 +227,13 @@ elif menu_choice == '2':
             if sorting_choice.upper() == 'A' or sorting_choice.upper() == 'B' or sorting_choice.upper() == 'C' or sorting_choice.upper() == 'D' or sorting_choice.upper() == 'E':
                 didSelect = 1
                 convert_and_sort(list_of_schedules, sorting_choice.upper())
-                #COMMENT this for final project NEEDED For Checking Only
-                for x in list_of_schedules:
-                    print(x['time'], x['subject'])
+                # COMMENT this for final project NEEDED For Checking Only
+                print(list_of_schedules)
                 #######################
                 print("Sorting Done")
 
             else:
-                print("The Command not found")
+                print("Command not found! ")
 
             return_menu = input('Return menu?')
             if return_menu.upper() == "Y":
