@@ -148,6 +148,44 @@ def add_sched():
     ask_to_add_more(input("|| would you like to add more to your schedule? Y or N: ").upper())
 
 
+def convert_and_sort(ls, choice):
+    converted_time = []
+    converted_name = []
+    for x in list_of_schedules:
+        converted_time.append(x['time'])
+        converted_name.append(x['subject'])
+    if choice == "A":
+        bubble_sort(converted_time)
+    if choice == "B":
+        selection_sort(converted_time)
+    if choice == "C":
+        insertion_sort(converted_time)
+    if choice == "D":
+        shellSort(converted_time)
+    if choice == "E":
+        merge_sort(converted_time)
+    convert_to_list_of_schedules(ls, converted_time,converted_name)
+
+
+def convert_to_list_of_schedules(ls, ct, cn):
+    global list_of_schedules
+    temsched = []
+    for i in range(len(ct)):
+        index = 0
+        for x in ls:
+            if x['time'] == ct[i]:
+                temsched.append({
+                "subject": cn[index],
+                "time": ct[i],
+                 })
+                break;
+            else:
+                index += 1
+    list_of_schedules = temsched
+    
+        
+
+
 menu_choice = input("""Menu: 
 1. View Sched
 2. Add Sched
@@ -174,40 +212,34 @@ elif menu_choice == '2':
     if add_choice == '1':
         didSelect = 0
         while (didSelect == 0):
-            sorting_choice = input("""Choose a sorting method: 
-            A. Bubble Sort
-            B. Selection Sort
-            C. Insertion Sort
-            D. Shell Sort
-            E. Merge Sort
+            sorting_choice = input("""
+    Choose a sorting method: 
+    A. Bubble Sort
+    B. Selection Sort
+    C. Insertion Sort
+    D. Shell Sort
+    E. Merge Sort
         
-            Answer: """)
+    Answer: """)
 
             # Change "variablename" to variable holding unsorted schedules
 
-            if sorting_choice.upper() == 'A':
-                bubble_sort(list_of_schedules)
+            if sorting_choice.upper() == 'A' or sorting_choice.upper() == 'B' or sorting_choice.upper() == 'C' or sorting_choice.upper() == 'D' or sorting_choice.upper() == 'E':
                 didSelect = 1
+                convert_and_sort(list_of_schedules,sorting_choice.upper())
+                #COMMENT this for final project NEEDED For Checking Only
+                print(list_of_schedules)
+                #######################
+                print("Sorting Done")
 
-            elif sorting_choice.upper() == 'B':
-                selection_sort(list_of_schedules) 
-                didSelect = 1
-
-            elif sorting_choice.upper() == 'C':
-                insertion_sort(list_of_schedules)
-                didSelect = 1
-
-            elif sorting_choice.upper() == 'D':
-                size = len(list_of_schedules)
-                shellSort(list_of_schedules, size)
-                didSelect = 1
-
-            elif sorting_choice.upper() == 'E':
-                merge_sort(list_of_schedules)
-                didSelect = 1
+            else:
+                print("The Command does not found")
 
             return_menu = input('Return menu?')
+            if return_menu.upper() == "Y":
+                didSelect = 1
 
     elif add_choice == '2':
         print('Dapat magback to menu.')
+
 
