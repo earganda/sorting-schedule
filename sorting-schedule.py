@@ -126,7 +126,7 @@ def ask_to_add_more(ans):
         print(header)
     else:
         print("|| -------- Notice: please answer Y or N only")
-        ask_to_add_more(input("|| Would you like to add more to your schedule?\n|| Y or N: ").upper())
+        ask_to_add_more(input('|| Would you like to add more to your schedule? \n|| Y or N: ').upper())
 
 
 def add_sched():
@@ -143,7 +143,7 @@ def add_sched():
         print(f"|| {sched['subject']} : {sched['time']}")
     print("||------------------------------------------------")
 
-    ask_to_add_more(input("|| Would you like to add more to your schedule? Y or N: ").upper())
+    ask_to_add_more(input('|| Would you like to add more to your schedule? \n|| Y or N: ').upper())
 
 
 def convert_and_sort(ls, choice):
@@ -200,7 +200,7 @@ def convert_to_list_of_schedules(ls, ict, cn):
 def main_menu():
     while True:
         print(header)
-        menu_choice = input('|| Menu: \n|| 1. View Sched\n|| 2. Add Sched \n|| Answer: ')
+        menu_choice = input('|| Menu: \n|| 1 - View Sched\n|| 2 - Add Sched \n|| Answer: ')
 
         # View Sched
         if menu_choice == '1':
@@ -220,16 +220,12 @@ def main_menu():
                     print(header)
                     sorting_choice = input('|| Choose a sorting method: \n|| A. Bubble Sort \n|| B. Selection Sort \n|| C. Insertion Sort \n|| D. Shell Sort \n|| E. Merge Sort \n|| Answer: ')
 
-                    # Change "variablename" to variable holding unsorted schedules
-
                     if sorting_choice.upper() == 'A' or sorting_choice.upper() == 'B' or sorting_choice.upper() == 'C' or sorting_choice.upper() == 'D' or sorting_choice.upper() == 'E':
                         didSelect = 1
                         convert_and_sort(list_of_schedules, sorting_choice.upper())
-                        # COMMENT this for final project NEEDED For Checking Only
-                        print('|| ', list_of_schedules)
-                        #######################
-                        print("|| Sorting Done")
-
+                        for x in list_of_schedules:
+                            print('|| ', x['time'], ' — ', x['subject'])
+                        print("|| \n|| Sorting done!\n|| ")
                     else:
                         print("|| -------- Command not found! ")
 
