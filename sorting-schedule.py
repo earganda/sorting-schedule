@@ -149,8 +149,10 @@ def convert_and_sort(ls, choice):
     converted_time = []
     converted_name = []
     for x in list_of_schedules:
-        converted_time.append(x['time'])
+        converted_time.append(x['time'].replace(":",""))
         converted_name.append(x['subject'])
+    for i in range(0, len(converted_time)): 
+        converted_time[i] = int(converted_time[i])
     if choice == "A":
         print('You chose: Bubble Sort\n')
         bubble_sort(converted_time)
@@ -169,16 +171,24 @@ def convert_and_sort(ls, choice):
     convert_to_list_of_schedules(ls, converted_time, converted_name)
 
 
-def convert_to_list_of_schedules(ls, ct, cn):
+def convert_to_list_of_schedules(ls, ict, cn):
     global list_of_schedules
     temsched = []
+    ct = [str(x) for x in ict]
     for i in range(len(ct)):
         index = 0
+        a = ""
+        if len(ct[i]) == 4:
+                a = ct[i]
+                a = a[:2] + ':' + a[2:]
+        if len(ct[i]) == 3:
+                a = ct[i]
+                a = a[:1] + ':' + a[1:]
         for x in ls:
-            if x['time'] == ct[i]:
+            if x['time'] == a:
                 temsched.append({
                 "subject": cn[index],
-                "time": ct[i],
+                "time": a,
                 })
                 break;
             else:
